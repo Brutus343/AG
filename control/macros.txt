@@ -1,0 +1,88 @@
+!include oreRefiner.txt
+
+automacro Heal {
+hp < 20%
+timeout 20
+exclusive 1
+call {
+do c @go geffen
+pause 1
+do talknpc 115 72
+}
+
+}
+
+automacro SP {
+sp < 10%
+timeout 20
+exclusive 1
+call {
+do c @go geffen
+pause 1
+do talknpc 115 72
+}
+}
+
+automacro goPayonToMaster {
+    console /Calculating route to find master: payon/
+    location not payon
+    call {
+        do c @go payon
+    }
+}
+
+automacro waitAtThaTower {
+    console /Map Change: tha_t01/
+    call {
+        do ai manual
+        pause 20
+        do ai on
+    }
+}
+
+automacro noRoute {
+    timeout 10
+    console /Stuck during route/
+    call {
+        do west 2
+    }
+}
+
+
+automacro fixBetterWalkPlan {
+    console /Calculating random route to:/
+    location gef_fild14
+    call {
+        log restarting walkplan
+        do plugin reload BetterWalkPlan
+        pause 2
+        do reload config
+        do move stop
+    }
+    timeout 300
+}
+
+automacro Set_Autoloot {
+    console /rAthena Version Git Hash/
+    delay 10
+    call {
+        do c @autoloot 100
+		pause 1
+    }
+}
+
+
+
+automacro moveRachelSanc {
+    console /Calculating lockMap route to.+ra_san01.+/
+    location not rachel
+    location not ra_san01
+    location not ra_san02
+    location not rachel
+    location not ra_temple
+    location not ra_temin
+    call {
+        do c @go rachel
+    }
+}
+

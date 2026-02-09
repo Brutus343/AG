@@ -1,0 +1,12 @@
+automacro AutolootOnLogin {
+     SimpleHookEvent in_game
+     exclusive 1
+     call {
+	       pause 5
+           do c \@autoloot 0.03
+		   pause 0.5
+		   do c \@alootid +Great Nature
+		   pause 0.5
+		   do c \@alootid +Rough Oridecon
+     }
+}

@@ -1,0 +1,7 @@
+automacro AutolootOnLogin {
+     SimpleHookEvent in_game
+     exclusive 1
+     call {
+           do c \@autoloot 100
+     }
+}

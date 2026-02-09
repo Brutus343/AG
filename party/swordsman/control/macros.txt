@@ -1,0 +1,150 @@
+!include oreRefiner.txt
+
+automacro Respawn {
+    party /respawn/
+    call {
+        do respawn
+		pause 0.5
+		do
+    }
+}
+automacro MoveRandom {
+timeout 300
+call {
+do north
+}
+}
+
+automacro ResAll {
+console /Party member Silver is alive./
+timeout 20
+disabled 1
+exclusive 1
+call Callres
+}
+
+macro Callres {
+do p res
+}
+
+automacro TriggerSP {
+    sp < 5%
+    timeout 10
+	disabled 1
+    call HealMySP
+}
+automacro TriggerHP {
+    hp < 15%
+    timeout 10 
+	disabled 1
+    call HealMyHP
+}
+macro HealMySP {
+    do c @go 11
+    :startLoop
+	do c HEAL ME
+    do talknpc 156 122
+    pause 1
+    $currentPercent = @eval(int($.sp / $::char->{sp_max} * 100))
+    if ($currentPercent < 90) goto startLoop
+	do c @go 11
+}
+macro HealMyHP {
+    do c @go 11
+    :startLoop
+	do c HEAL ME
+    do talknpc 156 122
+    pause 1
+    $currentPercent = @eval(int($.hp / $::char->{hp_max} * 100))
+    if ($currentPercent < 90) goto startLoop
+	do c @go 11
+}
+
+
+automacro Mid {
+console /Calculating lockMap route to: Manuk Field/
+timeout 20
+disabled 0
+exclusive 1
+call {
+do c @go 26
+}
+}
+
+automacro Nif {
+console /Calculating lockMap route to: Valley/
+timeout 20
+disabled 0
+exclusive 1
+call {
+do c @go nif
+pause 1
+do move 18 151
+}
+}
+
+automacro fixnif {
+location not gonryun
+location not niflheim
+location not nif_fild02
+location not nif_fild01
+disabled 1
+timeout 5
+call {
+do c @go 11
+pause 1
+}
+}
+
+automacro goPayonToMaster {
+    console /Calculating route to find master: payon/
+    location not payon
+    call {
+        do c @go payon
+    }
+}
+
+automacro waitAtThaTower {
+    console /Map Change: tha_t01/
+    call {
+        do ai manual
+        pause 20
+        do ai on
+    }
+}
+
+automacro noRoute {
+    timeout 10
+    console /Stuck during route/
+    call {
+        do west 2
+    }
+}
+
+
+automacro fixBetterWalkPlan {
+    console /Calculating random route to:/
+    location pay_d03_i
+    call {
+        log restarting walkplan
+        do plugin reload BetterWalkPlan
+        pause 2
+        do reload config
+        do move stop
+    }
+    timeout 150
+}
+
+automacro moveRachelSanc {
+    console /Calculating lockMap route to.+ra_san01.+/
+    location not rachel
+    location not ra_san01
+    location not ra_san02
+    location not rachel
+    location not ra_temple
+    location not ra_temin
+    call {
+        do c @go rachel
+    }
+}
+

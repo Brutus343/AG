@@ -1,0 +1,25 @@
+automacro AutolootOnLogin {
+     SimpleHookEvent in_game
+     exclusive 1
+     call {
+           do c \@autoloot 100
+     }
+}
+
+#automacro FlameWeapon {
+#   StatusInactiveHandle EFST_PROPERTYFIRE
+#   CurrentHP >50%
+#   exclusive 1
+#   call {	
+#       do c \@go geffen
+#		pause 2
+#	    do move 119 67
+#	    pause 1
+#		do pm SilverMonk3 endow
+#		log Waiting for Fire Weapon
+ #       pause 35
+#		do pm SilverWiz thanks
+#		pause 10
+#		do c \@go gony
+ #   }
+#}

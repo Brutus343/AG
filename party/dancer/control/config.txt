@@ -1,0 +1,815 @@
+master Asgards Glory
+server 0
+username Brutus2
+password Surecom01
+loginPinCode
+char 0
+
+poseidonServer 127.0.0.1
+poseidonPort 24390
+
+bindIp
+forceMapIP
+
+XKore 2
+XKore_port 2350
+XKore_dll NetRedirect.dll
+XKore_injectDLL 1
+XKore_autoAttachIfOneExe 1
+XKore_silent 1
+XKore_bypassBotDetection 0
+XKore_exeName
+
+XKore_listenIp 127.0.0.1
+XKore_listenPort 6903
+XKore_publicIp 127.0.0.1
+XKore_ID
+
+secureAdminPassword 0
+adminPassword 123456
+callSign
+commandPrefix ;
+callSignGM 0
+inGameAuth 0
+
+macAddress
+
+pauseCharLogin 2
+pauseCharServer 0
+pauseMapServer 0
+ignoreInvalidLogin 0
+
+whenInGame_requestCashPoints 0
+
+message_length_max 80
+
+######## Main configuration ########
+
+route_useGoCommand 1
+
+statsd 1
+statsd_host localhost     # your statsd server host
+statsd_port 8125          # your statsd server port
+statsd_prefix openkore_   # metric prefix
+statsd_debug 1
+
+route_randomWalk 0
+BetterWalkPlan 0
+teleport_search 0
+teleport_search_minSp 10
+
+lockMap mjolnir_03
+follow 0
+followTarget SilverWiz
+
+saveMap aldebaran
+saveMap_warpToBuyOrSell 1
+saveMap_warpChatCommand @go aldebaran
+
+route_teleport 1
+route_teleport_minDistance 150
+route_teleport_maxTries 40
+
+sellAuto 1
+sellAuto_npc aldebaran 145 122
+
+storageAuto 1
+storageAuto_npc aldebaran 143 119
+
+attackAuto 2
+attackAuto_party 1
+attackAuto_followTarget 1
+attackAuto_inLockOnly 2
+attackUseWeapon 0
+attackCheckLOS 1
+attackDistanceAuto 0
+
+######################### ITEMS #####################
+
+useSelf_item Stone Arrow Quiver {
+    inInventory Stone Arrow Quiver > 0, Stone Arrow < 50
+  #  whenEquipped Stone Arrow
+    timeout 0.5
+}
+
+
+buyAuto Red Potion {
+	npc xmas 141 136
+	minAmount 0
+	maxAmount 75
+	label buyredpots
+	disabled 1
+}
+useSelf_item Red Potion {
+	hp <70%
+}
+useSelf_item Royal Jelly {
+	sp <70%
+}
+
+getAuto Stone Arrow Quiver {
+	minAmount 1
+	maxAmount 5
+	disabled 0
+}
+getAuto Royal Jelly {
+	minAmount 0
+	maxAmount 50
+	disabled 0
+}
+
+buyAuto fly wing {
+	npc xmas 141 136
+	minAmount 5
+	maxAmount 100
+	label buyflywing
+	disabled 1
+}
+
+buyAuto Concentration Potion {
+	npc xmas 141 136
+	minAmount 0
+	maxAmount 10
+	label buyconpotws
+	disabled 1
+}
+
+
+buyAuto Fire Arrow {
+	npc xmas 141 136
+	minAmount 50
+	maxAmount 3000
+	label buyfirearrows
+	disabled 1
+}
+
+buyAuto Arrow {
+	npc xmas 141 136
+	minAmount 50
+	maxAmount 1500
+	label buyarrows
+	disabled 1
+}
+
+useSelf_item Concentration Potion {
+	whenStatusInactive Concentration Potion
+	onAction attack
+	disabled 1
+}
+
+
+######################## SKILLS #########################
+attackSkillSlot Double Strafe {
+	lvl 10
+	maxDist 9
+	sp > 15%
+	maxUses 3
+	disabled 1
+	equip_arrow Fire Arrow
+	#monsters Wolf,Cruiser,Myst Case,Enchanted Peach Tree,Zipper Bear,Peco Peco Egg,Porcellio,Orc Lady,Leaf Cat,Les,Mantis,Wood Goblin,Orc Warrior
+}
+
+attackSkillSlot Arrow Vulcan {
+	lvl 10
+	maxDist 9
+	sp > 2%
+	disabled 0
+	#maxUses 
+	monsters Cruiser, Petite
+}
+
+useSelf_skill Improve Concentration {
+	lvl 10
+	sp > 15%
+	whenStatusInactive Improve Concentration
+	disabled 0
+}
+
+useSelf_skill Service For You {
+	label performance
+	sp > 20%
+	whenStatusInactive EFST_BDPLAYING
+	smartEncore 0
+	inMap abyss_01,abyss_02,abyss_03
+	timeout 10
+	notWhileSitting 1
+	disabled 1
+}
+
+
+
+alias_heal sp 28
+
+allowedMaps
+allowedMaps_reaction 1
+
+
+
+
+attackAuto_onlyWhenSafe 0
+attackAuto_notInTown 1
+attackAuto_notWhile_storageAuto 1
+attackAuto_notWhile_buyAuto 1
+attackAuto_notWhile_sellAuto 1
+attackAuto_considerDamagedAggressive 0
+attackBeyondMaxDistance_waitForAgressive 1
+attackDistance
+attackMaxDistance 10
+attackMaxRouteDistance 50
+attackMaxRouteTime 4
+attackMinPlayerDistance 2
+attackMinPortalDistance 4
+attackNoGiveup 0
+attackCanSnipe 0
+attackRouteMaxPathDistance 13
+attackLooters 0
+attackChangeTarget 1
+aggressiveAntiKS 0
+
+attackUpdateMonsterPos 1
+
+autoMoveOnDeath 0
+autoMoveOnDeath_x
+autoMoveOnDeath_y
+autoMoveOnDeath_map
+
+attackEquip_topHead
+attackEquip_midHead
+attackEquip_lowHead
+attackEquip_leftHand
+attackEquip_rightHand
+attackEquip_leftAccessory
+attackEquip_rightAccessory
+attackEquip_robe
+attackEquip_armor
+attackEquip_shoes
+attackEquip_arrow
+
+# You need the breakTime plugin: https://openkore.com/wiki/BreakTime
+autoBreakTime {
+	startTime
+	stopTime
+}
+
+autoConfChange {
+	minTime
+	varTime
+	lvl
+	joblvl
+}
+
+autoMakeArrows 0
+
+autoRestart 0
+
+autoRestartMin 10800
+autoRestartSeed 3600
+
+autoRestartSleep 1
+autoSleepMin 900
+autoSleepSeed 900
+
+autoResponse 0
+autoResponseOnHeal 0
+
+autoSpell
+autoSpell_safe
+autoPoison
+
+avoidGM_namePattern
+avoidGM_near 0
+avoidGM_near_inTown 0
+avoidGM_talk 0
+avoidGM_reconnect 1800
+avoidGM_ignoreList
+
+avoidList 1
+avoidList_inLockOnly 0
+avoidList_reconnect 1800
+avoidList_ignoreList
+
+avoidHiddenActors 0
+
+cachePlayerNames 1
+cachePlayerNames_duration 900
+cachePlayerNames_maxSize 100
+
+clientSight 17
+
+dcPause 1
+dcOnDeath 0
+dcOnDualLogin 0
+dcOnDisconnect 0
+dcOnEmptyArrow 0
+dcOnMaxReconnections 0
+dcOnMute 0
+dcOnPM 0
+dcOnZeny 0
+dcOnStorageFull 1
+dcOnPlayer 0
+dcOnServerShutDown 0
+dcOnServerClose 0
+dcOnJobLevel
+dcOnLevel
+
+
+followEmotion 1
+followEmotion_distance 4
+followFaceDirection 0
+followDistanceMax 2
+followDistanceMin 1
+followLostStep 12
+followSitAuto 1
+followBot 0
+
+itemsTakeAuto 0
+itemsTakeAuto_party 0
+itemsGatherAuto 0
+itemsGatherAuto_notInTown 0
+itemsGatherAutoMinPlayerDistance 6
+itemsGatherAutoMinPortalDistance 5
+itemsMaxWeight 89
+itemsMaxWeight_sellOrStore 49
+itemsMaxNum_sellOrStore 99
+cartMaxWeight 7900
+itemsTakeGreed 0
+itemsCheckWeight 1
+
+
+lockMap_x
+lockMap_y
+lockMap_randX
+lockMap_randY
+
+route_escape_reachedNoPortal 1
+route_escape_randomWalk 1
+route_escape_shout
+route_avoidWalls 1
+route_randomWalk_inTown 0
+route_randomWalk_maxRouteTime 75
+route_maxWarpFee
+route_maxNpcTries 5
+
+route_teleport_notInMaps
+route_step 10
+route_removeMissingPortals_NPC 1
+route_removeMissingPortals 0
+route_tryToGuessMissingPortalByDistance 1
+route_reAddMissingPortals 1
+
+runFromTarget 0
+runFromTarget_inAdvance 0
+runFromTarget_dist 5
+runFromTarget_minStep 7
+runFromTarget_maxPathDistance 13
+
+
+memo1
+memo2
+memo3
+memo4
+
+shopAuto_open 0
+shop_random 0
+shop_useSkill 1
+
+buyerShopAuto_open 0
+buyerShop_random 0
+
+sitAuto_hp_lower
+sitAuto_hp_upper
+sitAuto_sp_lower
+sitAuto_sp_upper
+sitAuto_follow 0
+sitAuto_over_50 0
+sitAuto_idle 0
+sitAuto_look
+sitAuto_look_from_wall
+sitTensionRelax 0
+
+statsAddAuto 0
+statsAddAuto_list
+statsAddAuto_dontUseBonus 0
+statsAdd_over_99 1
+
+skillsAddAuto 0
+skillsAddAuto_list
+
+tankMode 0
+tankModeTarget
+
+teleportAuto_hp 0
+teleportAuto_sp 0
+teleportAuto_idle 1
+teleportAuto_portal 0
+teleportAuto_search 0
+teleportAuto_minAggressives 0
+teleportAuto_minAggressivesInLock 0
+teleportAuto_onlyWhenSafe 0
+teleportAuto_maxDmg
+teleportAuto_maxDmgInLock 0
+teleportAuto_deadly 1
+teleportAuto_useSkill 1
+teleportAuto_useChatCommand
+teleportAuto_allPlayers 0
+teleportAuto_notPlayers
+teleportAuto_atkCount 0
+teleportAuto_atkMiss 10
+teleportAuto_unstuck 0
+teleportAuto_lostTarget 0
+teleportAuto_dropTarget 0
+teleportAuto_dropTargetKS 0
+teleportAuto_attackedWhenSitting 0
+teleportAuto_totalDmg 0
+teleportAuto_totalDmgInLock 0
+teleportAuto_equip_leftAccessory
+teleportAuto_equip_rightAccessory
+teleportAuto_lostHomunculus
+teleportAuto_useItemForRespawn
+teleportAuto_item1
+teleportAuto_item2
+
+dealAuto 1
+dealAuto_names
+partyAuto 2
+partyAutoShare 0
+partyAutoShareItem 0
+partyAutoShareItemDiv 0
+guildAutoDeny 0
+attendanceAuto 1
+
+verbose 0
+showDomain 0
+showDomain_NPC parseMsg_presence
+showDomain_Shop list
+squelchDomains
+verboseDomains
+beepDomains
+beepDomains_notInTown
+friendlyAID
+showTime
+showTimeDomains
+showTimeDomainsFormat
+wx_map_maxAutoSize 300
+wx_map_monsterSticking 1
+wx_map_npcSticking 1
+wx_map_playersSticking 1
+wx_map_portalSticking 5
+wx_map_route
+wx_npcTalk 1
+wx_captcha
+showAllDamage 0
+manualURL https://openkore.com/wiki/Manual
+forumURL https://forums.openkore.com
+
+logChat 1
+logPrivateChat 1
+logPartyChat 1
+logGuildChat 1
+logSystemChat 1
+logLocalBroadcast 1
+logShop 1
+logEmoticons
+logConsole 1
+logAppendUsername 1
+logAppendServer 0
+monsterLog 0
+playerLog 0
+logDead 1
+
+questDisplayStyle 2
+
+chatTitleOversize 0
+shopTitleOversize 0
+buyerShopTitleOversize 0
+
+sleepTime 10000
+
+ignoreAll 0
+itemHistory 0
+autoTalkCont 1
+noAutoSkill 0
+portalCompile 0
+portalRecord 0
+portalRecord_recompileAfter 0
+missDamage 0
+
+tankersList
+
+repairAuto 0
+repairAuto_list
+
+status_mapProperty 0
+status_mapType 0
+
+monster_filter
+
+
+
+
+attackSkillSlot {
+	lvl
+	dist 1
+	maxDist 1
+	maxCastTime 0
+	minCastTime 0
+	hp
+	sp > 10
+	homunculus
+	homunculus_hp
+	homunculus_sp
+	homunculus_dead
+	homunculus_resting
+	homunculus_onAction
+	homunculus_notOnAction
+	homunculus_whenIdle
+	homunculus_whenNotIdle
+	mercenary
+	mercenary_hp
+	mercenary_sp
+	mercenary_whenStatusActive
+	mercenary_whenStatusInactive
+	mercenary_onAction
+	mercenary_notOnAction
+	mercenary_whenIdle
+	mercenary_whenNotIdle
+	onAction
+	whenStatusActive
+	whenStatusInactive
+	whenFollowing
+	spirit
+	amuletType
+	aggressives
+	previousDamage
+	stopWhenHit 0
+	inLockOnly 0
+	notInTown 0
+	timeout 0
+	disabled 0
+	monsters
+	notMonsters
+	monstersCount
+	monstersCountDist
+	maxAttempts 0
+	maxUses 0
+	target_hp
+	target_whenStatusActive
+	target_whenStatusInactive
+	target_deltaHp
+	whenPartyMembersNear
+	whenPartyMembersNearDist
+	inInventory
+	isSelfSkill 0
+	isStartSkill 0
+	equip_topHead
+	equip_midHead
+	equip_lowHead
+	equip_leftHand
+	equip_rightHand
+	equip_leftAccessory
+	equip_rightAccessory
+	equip_robe
+	equip_armor
+	equip_shoes
+	equip_arrow
+	manualAI 0
+}
+
+attackComboSlot {
+	afterSkill
+	waitBeforeUse
+	dist 1
+	maxDist 1
+	isSelfSkill 1
+	target_hp
+	target_deltaHp
+	monsters
+	notMonsters
+	monstersCount
+	monstersCountDist
+	whenPartyMembersNear
+	whenPartyMembersNearDist
+}
+
+doCommand {
+	hp
+	sp
+	homunculus
+	homunculus_hp
+	homunculus_sp
+	homunculus_dead
+	homunculus_resting
+	homunculus_onAction
+	homunculus_notOnAction
+	homunculus_whenIdle
+	homunculus_whenNotIdle
+	mercenary
+	mercenary_hp
+	mercenary_sp
+	mercenary_whenStatusActive
+	mercenary_whenStatusInactive
+	mercenary_onAction
+	mercenary_notOnAction
+	mercenary_whenIdle
+	mercenary_whenNotIdle
+	onAction
+	whenStatusActive
+	whenStatusInactive
+	whenFollowing
+	spirit
+	amuletType
+	aggressives
+	monsters
+	notMonsters
+	monstersCount
+	monstersCountDist
+	stopWhenHit 0
+	inLockOnly 0
+	notWhileSitting 0
+	notInTown 0
+	timeout
+	disabled 0
+	whenPartyMembersNear
+	whenPartyMembersNearDist
+	inInventory
+	inCart
+	inMap
+	manualAI 0
+}
+
+
+
+useSelf_skill_smartHeal 1
+
+partySkillDistance 0..8
+
+partySkill {
+	lvl
+	dist 1
+	maxDist 8
+	maxCastTime 0
+	minCastTime 0
+	hp
+	sp
+	homunculus
+	homunculus_hp
+	homunculus_sp
+	homunculus_dead
+	homunculus_resting
+	homunculus_onAction
+	homunculus_notOnAction
+	homunculus_whenIdle
+	homunculus_whenNotIdle
+	mercenary
+	mercenary_hp
+	mercenary_sp
+	mercenary_whenStatusActive
+	mercenary_whenStatusInactive
+	mercenary_onAction
+	mercenary_notOnAction
+	mercenary_whenIdle
+	mercenary_whenNotIdle
+	onAction
+	whenStatusActive
+	whenStatusInactive
+	whenFollowing
+	spirit
+	amuletType
+	aggressives
+	monsters
+	notMonsters
+	monstersCount
+	monstersCountDist
+	stopWhenHit 0
+	inLockOnly 0
+	notWhileSitting 0
+	notInTown 0
+	timeout 0
+	disabled 0
+	manualAI 0
+	target
+	target_hp
+	target_isJob
+	target_isNotJob
+	target_whenStatusActive
+	target_whenStatusInactive
+	target_aggressives
+	target_monsters
+	target_timeout 0
+	target_deltaHp
+	target_dead 0
+	whenPartyMembersNear
+	whenPartyMembersNearDist
+	inInventory
+	isSelfSkill 0
+}
+
+monsterSkill {
+	target
+	maxUses
+	whenPartyMembersNear
+	whenPartyMembersNearDist
+	# Skill Use Conditions, including isSelfSkill
+	# Self Conditions
+	# Target Monster Conditions
+}
+
+autoSwitch_default_rightHand
+autoSwitch_default_leftHand
+autoSwitch_default_arrow
+
+# NOTE: In the case of two handed weapons, or no Shield,
+#       duplicate the weapon name for 'rightHand'
+# To attack with bare hands, specify "[NONE]" (without the quotes) for rightHand
+
+autoSwitch {
+	rightHand
+	leftHand
+	arrow
+	distance
+	useWeapon
+}
+
+equipAuto {
+	topHead
+	midHead
+	lowHead
+	leftHand
+	rightHand
+	leftAccessory
+	rightAccessory
+	robe
+	armor
+	shoes
+	arrow
+	monsters
+	notMonsters
+	monstersCount
+	monstersCountDist
+	weight 0
+	whileSitting 0
+	hp
+	sp
+	homunculus
+	homunculus_hp
+	homunculus_sp
+	homunculus_dead
+	homunculus_resting
+	homunculus_onAction
+	homunculus_notOnAction
+	homunculus_whenIdle
+	homunculus_whenNotIdle
+	mercenary
+	mercenary_hp
+	mercenary_sp
+	mercenary_whenStatusActive
+	mercenary_whenStatusInactive
+	mercenary_onAction
+	mercenary_notOnAction
+	mercenary_whenIdle
+	mercenary_whenNotIdle
+	onAction
+	whenStatusActive
+	whenStatusInactive
+	whenFollowing
+	spirit
+	amuletType
+	aggressives
+	stopWhenHit 0
+	inLockOnly 0
+	notWhileSitting 0
+	notInTown 0
+	timeout 0
+	disabled 0
+	whenPartyMembersNear
+	whenPartyMembersNearDist
+	inInventory
+	manualAI 0
+}
+
+
+
+######## Autostorage/autosell ########
+
+npcTimeResponse
+npcWrongStepsMethod 0
+
+
+
+######## Debugging options; only useful for developers ########
+
+debug 0
+debugPacket_unparsed 0
+debugPacket_received 0
+debugPacket_ro_sent 0
+debugPacket_sent 0
+debugPacket_exclude
+debugPacket_include
+debugPacket_include_dumpMethod
+debugDomains
+logToFile_Debug
+logToFile_Errors
+logToFile_Messages
+logToFile_Warnings
+history_max 50
+macro_orphans terminate

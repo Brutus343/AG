@@ -1,0 +1,16 @@
+automacro AutolootOnLogin {
+     SimpleHookEvent in_game
+     exclusive 1
+     call {
+           do c \@autoloot 100
+     }
+}
+
+automacro Home {
+    PrivMsgName /home/ /Silver/
+    call GoHome
+}
+
+macro GoHome {
+        do c \@go geffen
+}

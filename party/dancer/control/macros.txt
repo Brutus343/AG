@@ -1,0 +1,23 @@
+automacro stuck {
+console /Stuck during route/
+call {
+do c @refresh
+}
+timeout 5
+}
+
+automacro stucktwo {
+console /Could not find an NPC/
+call {
+do c @refresh
+}
+timeout 5
+}
+
+automacro respondToLowStats {
+    party /lowstats/
+    timeout 5
+    call {
+        do sp "Marionette Control" SilverWiz 1
+    }
+}

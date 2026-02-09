@@ -1,0 +1,150 @@
+automacro stuck {
+console /Stuck during route/
+call {
+do c @refresh
+}
+timeout 5
+}
+automacro stucktwo {
+console /Could not find an NPC/
+call {
+do c @refresh
+}
+timeout 5
+}
+
+
+macro warpSleepers {
+    do c @go 11
+	do ai manual
+	pause 0.25
+    do sl 27 163 120
+    pause 1
+    do warp 1
+    pause 0.1
+    do move 163 120
+    do ai on
+}
+
+automacro fixsleeper {
+location not gonryun
+location not yuno_fild06
+location not prontera
+disabled 1
+timeout 5
+call {
+do c @go 11
+pause 1
+}
+}
+
+automacro fixstore {
+       console "Cannot calculate a route from yuno_fild06"
+timeout 5
+call {
+do c @go 11
+}
+}
+
+
+
+
+
+
+macro gn {
+do c @go 0
+pause 0.5
+do move 156 178
+}
+
+automacro GNTransfer {
+    storage Great Nature > 500
+	disabled 1
+    call {
+        do ai manual
+        log Starting Great Nature transfer from Kafra to Guild (stops at <50)
+        call transferGN
+        do ai on
+        stop
+    }
+}
+
+macro transferGN {
+    $item = "Great Nature"
+    $from = "Kafra"
+    $to = "Guild"
+    $iPos = prontera @eval(155 + @rand(0,3)) @eval(170 + @rand(0,3))
+    $guildNpc = 147 171 r0 n
+    $kafraNpc = 164 175 c r1 n
+    do move $iPos
+    log Transferring $item from $from to $to until <50 remaining
+    $fromNpc = $kafraNpc
+    $toNpc = $guildNpc
+
+    :mainLoop
+    # Stop condition: Kafra storage <=50
+    $gnInStorage = @storage($item)
+    if ($gnInStorage <= 50) goto done
+
+    log Opening Kafra Storage (current GN: $gnInStorage)
+    do talknpc $fromNpc
+    pause 0.5
+
+    # Get as much as possible without overweight (original logic)
+    while (($gnInStorage != -1) && ($.weight < @eval(0.9*$.maxweight))) as getLoop
+        do storage get $item
+        pause 0.2
+        $gnInStorage = @storage($item)
+    end getLoop
+
+    do storage close
+    pause 1
+
+    log Opening Guild Storage
+    do talknpc $toNpc
+    pause 0.5
+
+    # Add everything from inventory
+    $invAmt = @inventory($item)
+    while ($invAmt != -1) as addLoop
+        do storage add $item
+        pause 0.2
+        $invAmt = @inventory($item)
+    end addLoop
+
+    do storage close
+    pause 1
+
+    log Batch transferred - looping...
+    goto mainLoop
+
+    :done
+    log Great Nature transfer complete (<50 remaining in Kafra)
+    stop
+}
+
+
+macro transfer {
+:start
+    do talknpc 164 175 #kafra
+    pause 0.5
+    do talk resp 1 
+    pause 1
+    do storage get "Great Nature" 180
+	log  do storage get great nature
+    pause 0.2
+	do storage close
+	log do storage close
+    pause 0.2
+    do talknpc 147 171 #guildstorage
+    pause 0.2
+    do talk resp 0
+    pause 0.2
+    do storage add "Great Nature" 200
+    pause 0.2
+    do storage close
+    pause 0.5
+	log restarting macro
+    goto start
+:end
+}

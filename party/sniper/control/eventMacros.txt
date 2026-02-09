@@ -1,0 +1,13 @@
+automacro AutolootOnLogin {
+     SimpleHookEvent in_game
+     exclusive 1
+     call {
+           do c \@autoloot 1
+		   pause 0.5
+		   do c \@alootid +Elunium
+		   pause 0.5
+		   do c \@alootid +Steel			   		  
+     }
+}
+
+

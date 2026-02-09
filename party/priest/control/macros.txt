@@ -1,0 +1,194 @@
+automacro stuck {
+console /Stuck during route/
+call {
+do c @refresh
+}
+timeout 5
+}
+automacro Res {
+    party /res/
+    call {
+        do respawn
+		pause 0.5
+		do @go payon
+    }
+}
+
+
+automacro HolyEndow {
+    party /Holy/
+    call {
+        do sp 68 @player(Silver) 4
+    }
+}
+automacro Safety {
+    party /Safety/
+    call {
+        do sp Safety Wall @player(Silver) 10
+    }
+}
+automacro Sanctuary {
+    party /DANGER! 4 monsters nearby!/
+	timeout 5
+    call {
+        do ss Sanctuary 10
+    }
+}
+automacro Sanctuary {
+    party /DANGER! 3 monsters nearby!/
+	timeout 5
+    call {
+        do ss Sanctuary 10
+    }
+}
+
+automacro Respawn {
+    party /respawn/
+    call {
+        do respawn
+    }
+}
+automacro AiClear {
+timeout 300
+call {
+do aiclear
+}
+}
+automacro cantFindProntKafra {
+    console /Could not find an NPC at location/
+    call {
+        do c @refresh
+    }
+}
+
+automacro InGefenia {
+    console /Cannot calculate a route from gef/
+    call {
+        do c @go geffen
+    }
+}
+
+automacro goCampToMaster {
+    console /Calculating route to find master: mid/
+    location not mid_camp
+    call {
+        do c @go 26
+				do conf follow 1
+    }
+}
+automacro goAlbertaToMaster {
+    console /Calculating route to find master: alberta/
+    location not alberta
+    call {
+        do c @go alberta
+				do conf follow 1
+    }
+}
+automacro goGeffenToMaster {
+    console /Calculating route to find master: geffen/
+    location not geffen
+    call {
+        do c @go geffen
+				do conf follow 1
+    }
+}
+
+automacro goAyothayaToMaster {
+    console /Calculating route to find master: ayothaya/
+    location not ayothaya
+    call {
+        do c @go ayothaya
+				do conf follow 1
+    }
+}
+
+automacro goXmasToMaster {
+    console /Calculating route to find master: xmas/
+    location not xmas
+    call {
+        do c @go xmas
+				do conf follow 1
+    }
+}
+
+automacro goHugelToMaster {
+    console /Calculating route to find master: hugel/
+    location not hugel
+    call {
+        do c @go hugel
+				do conf follow 1
+    }
+}
+
+
+automacro goPayonToMaster {
+    console /Calculating route to find master: payon/
+    location not payon
+    call {
+        do c @go payon
+				do conf follow 1
+    }
+}
+
+automacro goMoroccToMaster {
+    console /Calculating route to find master: morocc/
+    location not morocc
+    call {
+        do c @go morocc
+				do conf follow 1
+    }
+}
+
+automacro goYunoToMaster {
+    console /Calculating route to find master: yuno/
+    location not yuno
+    call {
+        do c @go yuno
+				do conf follow 1
+    }
+}
+
+automacro goComodoToMaster {
+    console /Calculating route to find master: comodo/
+    location not comodo
+    call {
+        do c @go comodo
+				do conf follow 1
+    }
+}
+
+automacro goVeinsToMaster {
+    console /Calculating route to find master: veins/
+    location not veins
+    call {
+        do c @go veins
+				do conf follow 1
+    }
+}
+
+automacro goPronteraToMaster {
+    console /Calculating route to find master: prontera/
+    location not prontera
+    call {
+        do c @go prontera
+				do conf follow 1
+    }
+}
+
+automacro goRachelToMaster {
+    console /Calculating route to find master: rachel/
+    location not rachel
+    call {
+        do c @go rachel
+				do conf follow 1
+    }
+}
+
+automacro goAldeToMaster {
+    console /Calculating route to find master: aldebaran/
+    location not aldebaran
+    call {
+        do c @go aldebaran
+		do conf follow 1
+    }
+}

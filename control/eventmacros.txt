@@ -1,0 +1,182 @@
+## !include ../0_common/waitOnPriest.txt
+## !include repair_armor.txt
+#!include ../0_common/reset.txt
+#!include ../0_common/refreshNPC.txt
+
+automacro CheckPosition {
+    priority 1
+    InMap rachel
+    IsInCoordinate 180 115
+    call {
+    do move 210 126
+  }
+}
+
+automacro FrostWeapon {
+   StatusInactiveHandle EFST_PROPERTYWATER
+   CurrentHP >50%
+     disabled 0
+	 timeout 10
+   exclusive 1
+   call {	
+   do move stop
+   pause 5
+   do p endow
+   pause 0.5
+       do c \@go geffen
+	pause 1
+	do move 119 67
+	pause 10
+		
+    }
+}
+
+
+automacro attackGoodMinibosses {
+    MobNear /(Angeling|Deviling)/
+    timeout 1
+    call {
+        do a $.MobNearLastBinId
+        stop
+    }
+}
+
+automacro mimic {
+    MobNearDist /Mimic/ < 7
+    disabled 1
+    call {
+        do a $.MobNearDistLastBinId
+        stop
+    }
+}
+
+automacro dropMagnifier {
+    InInventory "Magnifier" > 0
+    CharCurrentWeight > 40%
+    InCity 0
+    timeout 1
+    call {
+        [
+            $id = &inventory ($.InInventoryLast)
+            do drop $id
+        ]
+        stop
+    }
+}
+
+#automacro dropOriAtAldeDun {
+#    InInventory "Oridecon" > 0
+#    CharCurrentWeight > 40%
+#    InMap alde_dun04
+#    InCity 0
+#    timeout 1
+#    call {
+#        [
+#            $id = &inventory ($.InInventoryLast)
+#            do drop $id 1
+#        ]
+#        stop
+#    }
+#}
+
+automacro Set_Autoloot {
+    exclusive 1
+    SimpleHookEvent in_game
+    delay 5
+    call {
+        do c \@autoloot 0.5
+    }
+}
+
+automacro openBoxes {
+    exclusive 1
+    InInventory "Asgards Event Box" > 1
+    CharCurrentWeight < 90%
+    InventoryCurrentSize < 100
+    ConfigKey openBoxes 1
+    call {
+        do is &Inventory(Asgards Event Box)
+        release openBoxesSell
+    }
+}
+
+automacro openBoxesSell {
+    exclusive 1
+    InventoryCurrentSize == 100
+    ConfigKey openBoxes 1
+    timeout 1
+    call {
+        lock openBoxes
+        pause 2
+        do autosell
+        pause 5
+        release openBoxes
+        lock openBoxesSell
+    }
+}
+
+
+# Usage:
+# eventMacro Refine 2504 7 985
+# eventMacro Refine 1625 7 984
+# Attempts to refine all 'Muffler [1]'s in inventory 7 times (NOT to +7)
+macro Refine {
+    log Refining '$.param[0]' '$.param[1]' times with '$.param[2]'
+    
+    do move prt_in 63 69
+
+    $refineList = &Inventory($.param[0])
+    #log Items to refine: $refineList
+    @refineArray = &split(',', $refineList)
+    #log @refineArray items to refine
+
+    do talknpc 63 60 n
+
+    $itemIndex = 0
+    while ($itemIndex < @refineArray) {
+        #log Refining $refineArray[$itemIndex]
+
+        $refineLevel = 0
+        while ($refineLevel < $.param[1]) {
+            do refineui select $refineArray[$itemIndex]
+            do refineui refine $refineArray[$itemIndex] $.param[2]
+
+            $refineLevel++
+        }
+
+        $itemIndex++
+    }
+
+    do refineui cancel
+}
+
+
+automacro slotUndershirt {
+    InInventory "Undershirt" > 0
+    ConfigKey slotUndershirts 1
+    call {
+        do talknpc 22 60 r1 r3 r3 r0
+    }
+}
+
+macro identify {
+    do is &Inventory(Magnifier)
+    do identify 0
+}
+
+automacro killPlayer {
+    # PlayerNear /(?!GnuSnipes|gururunt|StapoRadio|copious).+/
+    PlayerNear /(Stabby|TheGoods)/
+    # PlayerNear /.+/
+    InMap prtg_cas01, aldeg_cas02
+    timeout 2
+    disabled 1
+    call {
+        #if ($.PlayerNearLast !~ /(GnuSnipe.+|gururunt|StapoRadio|copious.+|Emperium)/) {
+        #    log $.PlayerNearLast
+        #    do kill $.PlayerNearLastBinId
+        #}
+        do kill $.PlayerNearLastBinId
+        stop
+    }
+}

@@ -1,0 +1,21 @@
+automacro AutolootOnLogin {
+     SimpleHookEvent in_game
+     exclusive 1
+     call {
+           do c \@autoloot 100
+     }
+}
+
+automacro CheckPosition {
+    priority 1
+    InMap payon
+    IsInCoordinate 186 233
+    call {
+    do move 182 241
+  }
+}
+
+
+
+
+

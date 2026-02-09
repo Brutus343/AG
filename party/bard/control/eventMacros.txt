@@ -1,0 +1,49 @@
+automacro AutolootOnLogin {
+     SimpleHookEvent in_game
+     exclusive 1
+     call {
+           do c \@autoloot 100
+     }
+}
+
+# Add this to your Bard's eventMacros.txt
+
+# Cast Bragi when LK engages
+automacro castBragiOnEngage {
+    PartyMsg /Engaging .+/
+    timeout 5
+	disabled 1
+    call {
+            do ss 321
+            pause 2
+    }
+}
+
+# Cancel Bragi after 20 seconds of combat
+automacro cancelBragiAfterCombat {
+    StatusActiveHandle EFST_BDPLAYING
+    timeout 10
+		disabled 1
+    call {
+	    pause 3
+        log [Bragi] Canceling Bragi for movement
+        do ss 304
+    }
+}
+
+sub countPartyNearby {
+    my $nearbyCount = 0;
+    my $range = 3;
+    
+    foreach my $player (@{$playersList->getItems()}) {
+        next unless $player->{party};
+        my $dist = distance($char->{pos_to}, $player->{pos_to});
+        Log::message("[Bragi] Player " . $player->{name} . " distance: $dist\n", "info");
+        if ($dist <= $range) {
+            $nearbyCount++;
+        }
+    }
+    
+    Log::message("[Bragi] Total party nearby: $nearbyCount\n", "info");
+    return $nearbyCount;
+}
